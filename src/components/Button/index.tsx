@@ -1,4 +1,4 @@
-import { ButtonContainer } from './styles'
+import { ButtonContainer, ButtonPopup } from './styles'
 
 type Props = {
   type: 'Button' | 'link'
@@ -11,9 +11,14 @@ type Props = {
 const Button = ({ type, onClick, children }: Props) => {
   if (type === 'Button') {
     return (
-      <ButtonContainer type="button" title="title" onClick={onClick}>
-        {children}
-      </ButtonContainer>
+      <>
+        <ButtonContainer type="button" title="title" onClick={onClick}>
+          {children}
+        </ButtonContainer>
+        <ButtonPopup type="button" title="title" onClick={onClick}>
+          {children}
+        </ButtonPopup>
+      </>
     )
   }
 }

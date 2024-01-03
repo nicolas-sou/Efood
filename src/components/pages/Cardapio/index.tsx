@@ -4,6 +4,7 @@ import PratosLista from '../../PratosList'
 import Prato from '../../models/Pratos'
 
 import PratoPizza from '../../../assets/images/Pizza.png'
+import Banner from '../../Banner'
 
 const cardapio: Prato[] = [
   {
@@ -53,6 +54,7 @@ const cardapio: Prato[] = [
 const Cardapio = () => (
   <>
     <Header />
+    <Banner />
     <PratosLista pratos={cardapio} />
     <Footer />
   </>
