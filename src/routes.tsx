@@ -1,12 +1,12 @@
 import { Route, Routes } from 'react-router-dom'
-import Cardapio from './components/pages/Cardapio'
-import Home from './components/pages/Home'
+
+import Home from './pages/Home'
+import Product from './pages/Product'
 
 const Rotas = () => (
   <Routes>
     <Route path="/" element={<Home />} />
-    <Route path="/cardapio" element={<Cardapio />} />
+    <Route path="/menu/:id" element={<Product />} />
   </Routes>
 )
-
 export default Rotas

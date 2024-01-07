@@ -1,52 +1,26 @@
-import styled from 'styled-components'
+import { styled } from 'styled-components'
 import { cores } from '../../styles'
 
-export const Card = styled.div`
-  background-color: ${cores.Laranja};
-  color: ${cores.bege};
-  padding: 8px;
-  margin-bottom: 56px;
+export const ListaPedidos = styled.ul`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 40px;
+  row-gap: 30px;
 `
-export const Titulo = styled.h3`
-  font-weight: 900;
-  font-size: 16px;
-  display: block;
-  margin: 8px;
+export const ContainerMenu = styled.section`
+  display: flex;
+  justify-content: center;
+  margin: 60px 0;
 `
-
-export const Descricao = styled.p`
-  font-weight: 400;
-  font-size: 14px;
-  margin: 8px;
-`
-export const CardModal = styled.div`
-  background-color: ${cores.Laranja};
-  width: 1024px;
-  height: 344px;
-
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin: 10px;
-  }
-
-  .content {
-    max-width: 700px;
-    margin-bottom: 30px;
-  }
-`
-
 export const Modal = styled.div`
+  display: none;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  top: 0px;
-  left: 0px;
   z-index: 1;
-  display: none;
-  align-items: center;
-  justify-content: center;
+
   &.visivel {
     display: flex;
   }
@@ -57,43 +31,62 @@ export const Modal = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgb(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.9);
   }
 `
-
 export const ModalContent = styled.div`
-  max-width: 1024px;
-  position: relative;
+  position: fixed;
   z-index: 1;
-  header {
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row-reverse;
+  top: 25%;
+  left: 22.7%;
+  max-width: 1040px;
+  width: 80%;
+  height: 344px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: ${cores.Laranja};
+  color: ${cores.Branco};
+`
+export const ModalPedido = styled.div`
+  padding: 20px;
+
+  img {
+    object-fit: cover;
+    position: absolute;
+    top: 10px;
+    right: 20px;
   }
 
-  .Fechar {
-    height: 16px;
-    margin: 8px;
+  h2 {
+    font-size: 18px;
+    font-weight: 900;
+    margin-bottom: 30px;
+  }
+
+  p {
+    line-height: 22px;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
   }
 `
+export const ModalImagem = styled.img`
+  object-fit: cover;
+  margin-left: 30px;
+  width: 280px;
+  height: 280px;
+`
+export const ModalBotao = styled.button`
+  border: none;
+  width: 218px;
+  height: 24px;
+  padding: 2px;
 
-export const Title = styled.span`
-  color: ${cores.Branco};
-  font-weight: 900;
-  font-size: 18px;
-  margin-bottom: 10px;
-`
-export const DescricaoModal = styled.p`
-  color: ${cores.Branco};
-  font-weight: 400;
+  font-weight: 700;
   font-size: 14px;
-  margin: 32px 0px;
-  display: block;
-`
-export const Sugerido = styled.span`
-  color: ${cores.Branco};
-  font-weight: 400;
-  font-size: 14px;
-  margin: 24px 0px;
-  display: block;
+
+  background-color: ${cores.bege};
+  color: ${cores.Laranja};
 `

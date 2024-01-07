@@ -1,31 +1,44 @@
-import { ButtonContainer, ButtonPopup } from '../Button/styles'
-import {
-  Card,
-  Titulo,
-  Descricao,
-  ModalContent,
-  Title,
-  DescricaoModal,
-  Sugerido,
-  Modal,
-  CardModal
-} from './styles'
-import PratoPizza from '../../assets/images/Pizza2.png'
-import Fechar from '../../assets/images/Fechar.png'
 import { useState } from 'react'
 
-type Props = {
-  title: string
-  description: string
-  image: string
+import { add, open } from '../../store/reducers/cart'
+import { Cardapio } from '../../pages/Home'
+import Pedidos from '../Pedido'
+
+import {
+  ContainerMenu,
+  ListaPedidos,
+  Modal,
+  ModalBotao,
+  ModalContent,
+  ModalImagem,
+  ModalPedido
+} from './styles'
+
+import closemodal from '../../assets/images/Fechar.png'
+import { useDispatch } from 'react-redux'
+
+export const formataPreco = (preco: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
 }
 
-type ModalState = {
+type Props = {
+  items: Cardapio[]
+}
+
+interface ModalState {
   isVisible: boolean
 }
 
-const Pratos = ({ title, description, image }: Props) => {
-  const closeModal = () => {
+const Pratos = ({ items }: Props) => {
+  const dispatch = useDispatch()
+  const [selectedProduct, setSelectedProduct] = useState<Cardapio>()
+  const addToCart = () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    dispatch(add(selectedProduct!))
+    dispatch(open())
     setModal({
       isVisible: false
     })
@@ -33,67 +46,68 @@ const Pratos = ({ title, description, image }: Props) => {
   const [modal, setModal] = useState<ModalState>({
     isVisible: false
   })
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 123) {
+      return descricao.slice(0, 120) + '...'
+    }
+    return descricao
+  }
+
+  const closeModal = () => {
+    setModal({
+      isVisible: false
+    })
+  }
+  const openModal = (product: Cardapio) => {
+    setSelectedProduct(product)
+    setModal({
+      isVisible: true
+    })
+  }
+
   return (
     <>
-      <Card>
-        <img src={image} alt={title} />
-        <Titulo>{title}</Titulo>
-        <Descricao>{description}</Descricao>
-        <ButtonContainer
-          onClick={() => {
-            setModal({
-              isVisible: true
-            })
-          }}
-        >
-          Adicionar ao carrinho
-        </ButtonContainer>
-      </Card>
-      <Modal className={modal.isVisible ? 'visivel' : ''}>
-        <ModalContent className="container">
-          <CardModal>
-            <header>
-              <img
-                className="Fechar"
-                src={Fechar}
-                alt="Icone de fechar"
-                onClick={() => {
-                  closeModal()
-                }}
+      <ContainerMenu>
+        <ListaPedidos>
+          {items.map((items) => (
+            <li key={items.id} onClick={() => openModal(items)}>
+              <Pedidos
+                foto={items.foto}
+                nome={items.nome}
+                descricao={getDescricao(items.descricao)}
               />
-            </header>
-            <div className="container">
-              <img src={PratoPizza} />
-              <div className="content">
-                <Title>Pizza Marguerita</Title>
-                <DescricaoModal>
-                  A pizza Margherita é uma pizza clássica da culinária italiana,
-                  reconhecida por sua simplicidade e sabor inigualável. Ela é
-                  feita com uma base de massa fina e crocante, coberta com molho
-                  de tomate fresco, queijo mussarela de alta qualidade,
-                  manjericão fresco e azeite de oliva extra-virgem. A combinação
-                  de sabores é perfeita, com o molho de tomate suculento e
-                  ligeiramente ácido, o queijo derretido e cremoso e as folhas
-                  de manjericão frescas, que adicionam um toque de sabor
-                  herbáceo. É uma pizza simples, mas deliciosa, que agrada a
-                  todos os paladares e é uma ótima opção para qualquer ocasião.
-                  <br />
-                </DescricaoModal>
-                <Sugerido>Serve: de 2 a 3 pessoas</Sugerido>
-                <ButtonPopup>Adicionar ao carrinho - R$60,90</ButtonPopup>
-              </div>
+            </li>
+          ))}
+        </ListaPedidos>
+      </ContainerMenu>
+      {selectedProduct && (
+        <Modal className={modal.isVisible ? 'visivel' : ''}>
+          <ModalContent>
+            <div>
+              <ModalImagem src={selectedProduct.foto} alt="Imagem do pedido" />
             </div>
-          </CardModal>
-        </ModalContent>
-        <div
-          onClick={() => {
-            closeModal()
-          }}
-          className="overlay"
-        ></div>
-      </Modal>
+            <ModalPedido>
+              <img
+                src={closemodal}
+                alt="Close Icon"
+                onClick={() => closeModal()}
+              />
+              <h2>{selectedProduct.nome}</h2>
+              <p>
+                {selectedProduct.descricao}
+                <br />
+                <br />
+                Serve {selectedProduct.porcao}
+              </p>
+              <ModalBotao onClick={addToCart}>
+                Adicionar ao carrinho - {formataPreco(selectedProduct.preco)}
+              </ModalBotao>
+            </ModalPedido>
+          </ModalContent>
+          <div onClick={() => closeModal()} className="overlay"></div>
+        </Modal>
+      )}
     </>
   )
 }
-
 export default Pratos
