@@ -8,7 +8,8 @@ import bannerImg from '../../assets/images/fundo.png'
 import { Restaurante } from '../../pages/Home'
 
 import { open } from '../../store/reducers/cart'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
 
 type Props = {
   restaurant: Restaurante
@@ -16,6 +17,7 @@ type Props = {
 
 const Header = ({ restaurant }: Props) => {
   const dispatch = useDispatch()
+  const { items } = useSelector((state: RootReducer) => state.cart)
 
   const toUpperCase = (tipo: string) => {
     if (tipo === restaurant.tipo) {
@@ -34,7 +36,7 @@ const Header = ({ restaurant }: Props) => {
         </Link>
         <Logo src={logo} alt="Logo" />
         <a onClick={openCart}>
-          <span>0 produtos (s) no carrinho</span>
+          {items.length} {''} produto(s) <span>no carrinho</span>
         </a>
       </HeaderBar>
       <Banner
