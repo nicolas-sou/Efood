@@ -39,6 +39,7 @@ const Header = ({ restaurant }: Props) => {
           {items.length} {''} produto(s) <span>no carrinho</span>
         </a>
       </HeaderBar>
+
       <Banner
         style={{
           backgroundImage: `url(${restaurant.capa})`

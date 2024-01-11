@@ -36,16 +36,19 @@ export const Logo = styled.img`
 `
 
 export const Banner = styled.div`
+  position: relative;
+  display: block;
   width: 100%;
   height: 280px;
   background-position: center;
-  background-size: cover;
+  background-size: 100%;
+  background-repeat: no-repeat;
   &::after {
     position: absolute;
     background-color: #000;
     width: 100%;
-    height: 29%;
-
+    height: 100%;
+    top: 0;
     left: 0;
     content: '';
     opacity: 0.3;

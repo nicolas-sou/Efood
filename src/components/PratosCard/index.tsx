@@ -31,6 +31,9 @@ const Produto = ({
   image,
   destacados
 }: Props) => {
+  const capitalizeFirstLetter = (str: string) => {
+    return str.charAt(0).toUpperCase() + str.slice(1)
+  }
   const getDescricaoHome = (description: string) => {
     if (description.length > 123) {
       return description.slice(0, 210) + '...'
@@ -40,7 +43,7 @@ const Produto = ({
   return (
     <Card>
       <img src={image} alt={title} className="capa" />
-      <TagCategory>{category}</TagCategory>
+      <TagCategory>{capitalizeFirstLetter(category)}</TagCategory>
       <div>
         {destacados.map((destacado) => (
           <TagDestacado key={destacado}>{destacado}</TagDestacado>

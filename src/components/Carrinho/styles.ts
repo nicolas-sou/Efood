@@ -33,6 +33,8 @@ export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
   padding: 40px 16px 0 16px;
+  max-height: 80vh;
+  overflow-y: auto;
 
   &.is-closed {
     display: none;
@@ -146,7 +148,7 @@ export const Button = styled.button`
   width: 100%;
   padding: 4px;
   border: none;
-  background-color: '${cores.bege}' '#ccc';
+  background-color: ${cores.bege};
   color: ${cores.Laranja};
   font-weight: bold;
   font-size: 14px;
