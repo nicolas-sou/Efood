@@ -33,7 +33,7 @@ export const Sidebar = styled.aside`
   max-width: 360px;
   width: 100%;
   padding: 40px 16px 0 16px;
-  max-height: 80vh;
+  max-height: 100vh;
   overflow-y: auto;
 
   &.is-closed {

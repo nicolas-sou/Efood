@@ -35,12 +35,11 @@ export const Modal = styled.div`
   }
 `
 export const ModalContent = styled.div`
-  position: fixed;
+  position: relative;
   z-index: 1;
   top: 25%;
   left: 22.7%;
-  max-width: 1040px;
-  width: 80%;
+  width: 54.7%;
   height: 344px;
   display: flex;
   justify-content: space-between;

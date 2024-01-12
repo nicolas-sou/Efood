@@ -41,8 +41,9 @@ export const Banner = styled.div`
   width: 100%;
   height: 280px;
   background-position: center;
-  background-size: 100%;
+  background-size: cover;
   background-repeat: no-repeat;
+  object-fit: cover;
   &::after {
     position: absolute;
     background-color: #000;
@@ -51,7 +52,7 @@ export const Banner = styled.div`
     top: 0;
     left: 0;
     content: '';
-    opacity: 0.3;
+    opacity: 0.4;
   }
 `
 export const Titulo = styled.section`
@@ -61,10 +62,11 @@ export const Titulo = styled.section`
   color: ${cores.Branco};
   margin-right: 30px;
 
-  h3 {
+  p {
     font-weight: 100;
     position: absolute;
     font-size: 32px;
+    line-height: 37.5px;
     top: 51px;
     left: 18.8vw;
   }

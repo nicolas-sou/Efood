@@ -46,9 +46,7 @@ const Header = ({ restaurant }: Props) => {
         }}
       >
         <Titulo>
-          <h3>
-            <i>{toUpperCase(restaurant.tipo)}</i>
-          </h3>
+          <p>{toUpperCase(restaurant.tipo)}</p>
           <h2>{restaurant.titulo}</h2>
         </Titulo>
       </Banner>
